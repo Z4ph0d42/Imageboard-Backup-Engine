@@ -1,7 +1,7 @@
 #!/bin/bash
 # =================================================================
 # OMNI-CHAN BORG BACKUP SCRIPT
-# Version: 2.4 - Universal Docker Engine (Mongo & MariaDB)
+# Version: 2.5 - Multi-Path Support (Docker)
 # =================================================================
 
 # --- 1. LOAD CONFIG ---
@@ -28,23 +28,20 @@ if [ "$DB_TYPE" == "mongodb" ]; then
     docker exec "$DK_DB_CONTAINER" mongodump \
         --username "$DB_USER" --password "$DB_PASS" \
         --authenticationDatabase admin --archive > "$TEMP_DUMP"
-
 elif [ "$DB_TYPE" == "mariadb" ] || [ "$DB_TYPE" == "mysql" ]; then
     docker exec "$DK_DB_CONTAINER" mariadb-dump \
         -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" > "$TEMP_DUMP"
-else
-    echo "  [ERROR] Unknown DB_TYPE: $DB_TYPE"
-    exit 1
 fi
 
 if [ $? -ne 0 ]; then echo "  [ERROR] DB Dump failed!"; exit 1; fi
 
 # --- 3. BORG ARCHIVE STEP ---
 echo "Step 2/3: Creating Borg archive..."
+# We now allow DK_APP_DIR to contain multiple paths (separated by spaces)
 borg create --stats --progress              \
     "$BORG_REPO::$ARCHIVE_NAME"             \
     "$TEMP_DUMP"                            \
-    "$DK_APP_DIR"
+    $DK_APP_DIR
     
 if [ $? -ne 0 ]; then echo "  [ERROR] Borg failed!"; exit 1; fi
 
