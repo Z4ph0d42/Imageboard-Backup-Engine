@@ -1,91 +1,55 @@
 #!/bin/bash
 # =================================================================
 # OMNI-CHAN BORG BACKUP SCRIPT
-# Author: Z4ph0d42
-# Version: 2.3 - Fully De-coupled (Safe for Public GitHub)
+# Version: 2.4 - Universal Docker Engine (Mongo & MariaDB)
 # =================================================================
 
-# --- 1. LOAD SENSITIVE CONFIG ---
-# Find the folder where this script is located
+# --- 1. LOAD CONFIG ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# Source the secret configuration file
 if [ -f "$SCRIPT_DIR/config.env" ]; then
     source "$SCRIPT_DIR/config.env"
 else
-    echo "  [ERROR] config.env not found in $SCRIPT_DIR"
-    echo "  Please create it before running this script."
+    echo "[ERROR] config.env not found!"
     exit 1
 fi
 
-# Universal Archive Name
-ARCHIVE_NAME="omnichan-$(date +%Y-%m-%dT%H:%M:%S)"
-BM_TEMP_DUMP="/tmp/vichan_db_dump.sql"
-DK_TEMP_DUMP="/tmp/jschan_db_dump.archive"
+ARCHIVE_NAME="${SITE_NAME:-omnichan}-$(date +%Y-%m-%dT%H:%M:%S)"
+TEMP_DUMP="/tmp/db_dump.archive"
 
-# --- 2. SELF-CLEANING MECHANISM ---
-# Ensures temp DB dumps are ALWAYS removed on exit
-trap 'rm -f "$BM_TEMP_DUMP" "$DK_TEMP_DUMP"' EXIT
+trap 'rm -f "$TEMP_DUMP"' EXIT
 
-echo "--- Starting Omni-Chan Borg Backup Process $(date '+%a %b %d %I:%M:%S %p %Z %Y') ---"
-echo "Active Mode: [$BACKUP_MODE]"
-
+echo "--- Starting Backup for [$SITE_NAME] at $(date) ---"
 export BORG_PASSPHRASE
 
-# =================================================================
-# --- ROUTINE A: BARE METAL (VICHAN) ---
-# =================================================================
-if [ "$BACKUP_MODE" == "bare-metal" ]; then
-    echo "Step 1/3: Dumping MariaDB/MySQL database..."
-    mysqldump -u "$BM_DB_USER" -p"$BM_DB_PASS" "$BM_DB_NAME" > "$BM_TEMP_DUMP"
-    if [ $? -ne 0 ]; then echo "  [ERROR] Database dump failed."; exit 1; fi
+# --- 2. DATABASE DUMP STEP ---
+echo "Step 1/3: Dumping $DB_TYPE database from $DK_DB_CONTAINER..."
 
-    echo "Step 2/3: Creating Borg archive..."
-    borg create --stats --progress              \
-        "$BORG_REPO::$ARCHIVE_NAME"             \
-        "$BM_SOURCE_DIR"                        \
-        "$BM_TEMP_DUMP"
-    if [ $? -ne 0 ]; then echo "  [ERROR] Borg creation failed."; exit 1; fi
+if [ "$DB_TYPE" == "mongodb" ]; then
+    docker exec "$DK_DB_CONTAINER" mongodump \
+        --username "$DB_USER" --password "$DB_PASS" \
+        --authenticationDatabase admin --archive > "$TEMP_DUMP"
 
-# =================================================================
-# --- ROUTINE B: DOCKER (JSCHAN) ---
-# =================================================================
-elif [ "$BACKUP_MODE" == "docker" ]; then
-    echo "Step 1/3: Extracting MongoDB from Docker Container..."
-    docker exec "$DK_MONGO_CONTAINER" mongodump \
-        --username "$DK_MONGO_USER" \
-        --password "$DK_MONGO_PASS" \
-        --authenticationDatabase admin \
-        --archive > "$DK_TEMP_DUMP"
-    
-    if [ $? -ne 0 ]; then echo "  [ERROR] MongoDB extraction failed."; exit 1; fi
-
-    echo "Step 2/3: Creating Borg archive..."
-    borg create --stats --progress              \
-        "$BORG_REPO::$ARCHIVE_NAME"             \
-        "$DK_TEMP_DUMP"                         \
-        "$DK_APP_DIR/static"                    \
-        "$DK_APP_DIR/configs/secrets.js"        \
-        "$DK_APP_DIR/docker-compose.yml"
-    if [ $? -ne 0 ]; then echo "  [ERROR] Borg creation failed."; exit 1; fi
-
+elif [ "$DB_TYPE" == "mariadb" ] || [ "$DB_TYPE" == "mysql" ]; then
+    docker exec "$DK_DB_CONTAINER" mariadb-dump \
+        -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" > "$TEMP_DUMP"
 else
-    echo "  [ERROR] Invalid BACKUP_MODE set in config.env."
+    echo "  [ERROR] Unknown DB_TYPE: $DB_TYPE"
     exit 1
 fi
 
-# =================================================================
-# --- Step 3: UNIVERSAL PRUNING ---
-# =================================================================
+if [ $? -ne 0 ]; then echo "  [ERROR] DB Dump failed!"; exit 1; fi
+
+# --- 3. BORG ARCHIVE STEP ---
+echo "Step 2/3: Creating Borg archive..."
+borg create --stats --progress              \
+    "$BORG_REPO::$ARCHIVE_NAME"             \
+    "$TEMP_DUMP"                            \
+    "$DK_APP_DIR"
+    
+if [ $? -ne 0 ]; then echo "  [ERROR] Borg failed!"; exit 1; fi
+
+# --- 4. PRUNE ---
 echo "Step 3/3: Pruning old backups..."
-borg prune -v --list                            \
-    --keep-daily=${KEEP_DAILY:-7}               \
-    --keep-weekly=${KEEP_WEEKLY:-4}             \
-    --keep-monthly=${KEEP_MONTHLY:-6}           \
-    "$BORG_REPO"
+borg prune -v --list --keep-daily=7 --keep-weekly=4 "$BORG_REPO"
 
-if [ $? -ne 0 ]; then echo "  [ERROR] Pruning failed."; exit 1; fi
-
-echo "------------------------------------------------------"
-echo "✅ Omni-Chan Backup Complete! ✅"
-echo "------------------------------------------------------"
+echo "✅ Backup for $SITE_NAME Complete! ✅"
