@@ -2,7 +2,7 @@
 # =================================================================
 # OMNI-CHAN BORG BACKUP SCRIPT
 # Author: Z4ph0d42
-# Version: 2.0 - Dual-Engine (Bare-Metal & Docker)
+# Version: 2.1 - Auth-Fixed (Dual-Engine)
 # =================================================================
 
 # --- 1. CORE CONFIGURATION ---
@@ -36,6 +36,7 @@ DK_TEMP_DUMP="/tmp/jschan_db_dump.archive"
 # =================================================================
 # --- Self-Cleaning Mechanism ---
 # Ensures temp DB dumps are ALWAYS removed when the script exits
+# This logic is adapted from your original VICHAN BACKUP SCRIPT
 trap 'rm -f "$BM_TEMP_DUMP" "$DK_TEMP_DUMP"' EXIT
 
 echo "--- Starting Omni-Chan Borg Backup Process $(date '+%a %b %d %I:%M:%S %p %Z %Y') ---"
@@ -48,6 +49,7 @@ export BORG_PASSPHRASE
 # =================================================================
 if [ "$BACKUP_MODE" == "bare-metal" ]; then
     echo "Step 1/3: Dumping MariaDB/MySQL database..."
+    # Uses credentials provided in BM_DB settings
     mysqldump -u "$BM_DB_USER" -p"$BM_DB_PASS" "$BM_DB_NAME" > "$BM_TEMP_DUMP"
     if [ $? -ne 0 ]; then echo "  [ERROR] Failed to dump database. Aborting."; exit 1; fi
 
@@ -63,12 +65,18 @@ if [ "$BACKUP_MODE" == "bare-metal" ]; then
 # =================================================================
 elif [ "$BACKUP_MODE" == "docker" ]; then
     echo "Step 1/3: Extracting MongoDB from Docker Container..."
-    # We execute mongodump inside the container, but output it as a stream directly to our host's temp folder!
-    docker exec "$DK_MONGO_CONTAINER" mongodump --archive > "$DK_TEMP_DUMP"
+    # AUTH FIXED: Added --username, --password, and --authenticationDatabase
+    # Outputs directly to the host's /tmp folder as an archive stream
+    docker exec "$DK_MONGO_CONTAINER" mongodump \
+        --username jschan \
+        --password s90Z3bGBO1SMBA8FECvmjagXdYigjR7s \
+        --authenticationDatabase admin \
+        --archive > "$DK_TEMP_DUMP"
+    
     if [ $? -ne 0 ]; then echo "  [ERROR] Failed to extract MongoDB. Aborting."; exit 1; fi
 
     echo "Step 2/3: Creating Borg archive..."
-    # We backup the Database, the bridged Static folder, the Secrets, and the Compose file.
+    # Backs up the DB archive, Static media, Secrets, and Docker Compose file.
     borg create --stats --progress              \
         "$BORG_REPO::$ARCHIVE_NAME"             \
         "$DK_TEMP_DUMP"                         \
@@ -85,6 +93,7 @@ fi
 # =================================================================
 # --- Step 3: UNIVERSAL PRUNING ---
 # =================================================================
+# Standard Borg pruning based on your original retention schedule
 echo "Step 3/3: Pruning and cleaning up old backups..."
 borg prune -v --list                            \
     --keep-daily=$KEEP_DAILY                    \
