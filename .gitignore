@@ -1,0 +1,10 @@
+# Ignore the actual secrets file
+config.env
+
+# Ignore any temporary dump files
+*.sql
+*.archive
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
