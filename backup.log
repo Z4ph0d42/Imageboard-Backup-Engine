@@ -1,0 +1,185 @@
+--- Starting Backup for [fogchan] at Mon Apr 13 03:00:01 AM CEST 2026 ---
+Step 1/3: Dumping mongodb database from 42chan-dev-db...
+2026-04-13T01:00:01.587+0000	writing `admin.system.users` to `archive on stdout`
+2026-04-13T01:00:01.589+0000	done dumping `admin.system.users` (2 documents)
+2026-04-13T01:00:01.589+0000	writing `admin.system.version` to `archive on stdout`
+2026-04-13T01:00:01.594+0000	done dumping `admin.system.version` (1 document)
+2026-04-13T01:00:01.594+0000	writing `jschan.modlog` to `archive on stdout`
+2026-04-13T01:00:01.594+0000	writing `jschan.boards` to `archive on stdout`
+2026-04-13T01:00:01.595+0000	writing `jschan.posts` to `archive on stdout`
+2026-04-13T01:00:01.595+0000	writing `jschan.files` to `archive on stdout`
+2026-04-13T01:00:01.598+0000	done dumping `jschan.modlog` (73 documents)
+2026-04-13T01:00:01.598+0000	writing `jschan.poststats` to `archive on stdout`
+2026-04-13T01:00:01.599+0000	done dumping `jschan.posts` (24 documents)
+2026-04-13T01:00:01.599+0000	writing `jschan.filters` to `archive on stdout`
+2026-04-13T01:00:01.599+0000	done dumping `jschan.poststats` (14 documents)
+2026-04-13T01:00:01.599+0000	writing `jschan.roles` to `archive on stdout`
+2026-04-13T01:00:01.600+0000	done dumping `jschan.files` (19 documents)
+2026-04-13T01:00:01.600+0000	writing `jschan.accounts` to `archive on stdout`
+2026-04-13T01:00:01.602+0000	done dumping `jschan.boards` (70 documents)
+2026-04-13T01:00:01.602+0000	writing `jschan.version` to `archive on stdout`
+2026-04-13T01:00:01.604+0000	done dumping `jschan.roles` (8 documents)
+2026-04-13T01:00:01.604+0000	writing `jschan.globalsettings` to `archive on stdout`
+2026-04-13T01:00:01.606+0000	done dumping `jschan.filters` (11 documents)
+2026-04-13T01:00:01.606+0000	writing `jschan.news` to `archive on stdout`
+2026-04-13T01:00:01.608+0000	done dumping `jschan.globalsettings` (1 document)
+2026-04-13T01:00:01.608+0000	writing `jschan.bans` to `archive on stdout`
+2026-04-13T01:00:01.612+0000	done dumping `jschan.version` (1 document)
+2026-04-13T01:00:01.612+0000	writing `jschan.captcha` to `archive on stdout`
+2026-04-13T01:00:01.612+0000	done dumping `jschan.accounts` (1 document)
+2026-04-13T01:00:01.612+0000	writing `jschan.custompages` to `archive on stdout`
+2026-04-13T01:00:01.618+0000	done dumping `jschan.news` (1 document)
+2026-04-13T01:00:01.618+0000	writing `jschan.ratelimit` to `archive on stdout`
+2026-04-13T01:00:01.621+0000	done dumping `jschan.custompages` (0 documents)
+2026-04-13T01:00:01.621+0000	writing `jschan.bypass` to `archive on stdout`
+2026-04-13T01:00:01.621+0000	done dumping `jschan.bans` (0 documents)
+2026-04-13T01:00:01.623+0000	done dumping `jschan.captcha` (0 documents)
+2026-04-13T01:00:01.623+0000	done dumping `jschan.ratelimit` (0 documents)
+2026-04-13T01:00:01.624+0000	done dumping `jschan.bypass` (0 documents)
+Step 2/3: Creating Borg archive...
+passphrase supplied in BORG_PASSPHRASE, by BORG_PASSCOMMAND or via BORG_PASSPHRASE_FD is incorrect.
+  [ERROR] Borg failed!
+--- Starting Backup for [fogchan] at Tue Apr 14 03:00:01 AM CEST 2026 ---
+Step 1/3: Dumping mongodb database from 42chan-dev-db...
+2026-04-14T01:00:01.207+0000	writing `admin.system.users` to `archive on stdout`
+2026-04-14T01:00:01.209+0000	done dumping `admin.system.users` (2 documents)
+2026-04-14T01:00:01.209+0000	writing `admin.system.version` to `archive on stdout`
+2026-04-14T01:00:01.214+0000	done dumping `admin.system.version` (1 document)
+2026-04-14T01:00:01.214+0000	writing `jschan.modlog` to `archive on stdout`
+2026-04-14T01:00:01.214+0000	writing `jschan.boards` to `archive on stdout`
+2026-04-14T01:00:01.214+0000	writing `jschan.posts` to `archive on stdout`
+2026-04-14T01:00:01.214+0000	writing `jschan.files` to `archive on stdout`
+2026-04-14T01:00:01.219+0000	done dumping `jschan.modlog` (73 documents)
+2026-04-14T01:00:01.219+0000	writing `jschan.poststats` to `archive on stdout`
+2026-04-14T01:00:01.220+0000	done dumping `jschan.boards` (70 documents)
+2026-04-14T01:00:01.220+0000	writing `jschan.filters` to `archive on stdout`
+2026-04-14T01:00:01.220+0000	done dumping `jschan.files` (22 documents)
+2026-04-14T01:00:01.220+0000	writing `jschan.roles` to `archive on stdout`
+2026-04-14T01:00:01.221+0000	done dumping `jschan.posts` (29 documents)
+2026-04-14T01:00:01.221+0000	writing `jschan.accounts` to `archive on stdout`
+2026-04-14T01:00:01.221+0000	done dumping `jschan.poststats` (17 documents)
+2026-04-14T01:00:01.221+0000	writing `jschan.version` to `archive on stdout`
+2026-04-14T01:00:01.222+0000	done dumping `jschan.filters` (11 documents)
+2026-04-14T01:00:01.222+0000	writing `jschan.globalsettings` to `archive on stdout`
+2026-04-14T01:00:01.225+0000	done dumping `jschan.roles` (8 documents)
+2026-04-14T01:00:01.225+0000	writing `jschan.news` to `archive on stdout`
+2026-04-14T01:00:01.226+0000	done dumping `jschan.accounts` (4 documents)
+2026-04-14T01:00:01.226+0000	writing `jschan.bans` to `archive on stdout`
+2026-04-14T01:00:01.233+0000	done dumping `jschan.news` (1 document)
+2026-04-14T01:00:01.233+0000	writing `jschan.captcha` to `archive on stdout`
+2026-04-14T01:00:01.236+0000	done dumping `jschan.version` (1 document)
+2026-04-14T01:00:01.236+0000	writing `jschan.custompages` to `archive on stdout`
+2026-04-14T01:00:01.236+0000	done dumping `jschan.captcha` (0 documents)
+2026-04-14T01:00:01.236+0000	writing `jschan.ratelimit` to `archive on stdout`
+2026-04-14T01:00:01.239+0000	done dumping `jschan.globalsettings` (1 document)
+2026-04-14T01:00:01.239+0000	writing `jschan.bypass` to `archive on stdout`
+2026-04-14T01:00:01.242+0000	done dumping `jschan.bypass` (0 documents)
+2026-04-14T01:00:01.244+0000	done dumping `jschan.ratelimit` (0 documents)
+2026-04-14T01:00:01.244+0000	done dumping `jschan.bans` (0 documents)
+2026-04-14T01:00:01.246+0000	done dumping `jschan.custompages` (0 documents)
+Step 2/3: Creating Borg archive...
+passphrase supplied in BORG_PASSPHRASE, by BORG_PASSCOMMAND or via BORG_PASSPHRASE_FD is incorrect.
+  [ERROR] Borg failed!
+--- Starting Backup for [fogchan] at Wed Apr 15 03:00:01 AM CEST 2026 ---
+Step 1/3: Dumping mongodb database from 42chan-dev-db...
+2026-04-15T01:00:01.732+0000	writing `admin.system.users` to `archive on stdout`
+2026-04-15T01:00:01.733+0000	done dumping `admin.system.users` (2 documents)
+2026-04-15T01:00:01.733+0000	writing `admin.system.version` to `archive on stdout`
+2026-04-15T01:00:01.745+0000	done dumping `admin.system.version` (1 document)
+2026-04-15T01:00:01.745+0000	writing `jschan.boards` to `archive on stdout`
+2026-04-15T01:00:01.745+0000	writing `jschan.modlog` to `archive on stdout`
+2026-04-15T01:00:01.745+0000	writing `jschan.files` to `archive on stdout`
+2026-04-15T01:00:01.745+0000	writing `jschan.posts` to `archive on stdout`
+2026-04-15T01:00:01.749+0000	done dumping `jschan.boards` (70 documents)
+2026-04-15T01:00:01.749+0000	writing `jschan.poststats` to `archive on stdout`
+2026-04-15T01:00:01.749+0000	done dumping `jschan.posts` (45 documents)
+2026-04-15T01:00:01.749+0000	writing `jschan.filters` to `archive on stdout`
+2026-04-15T01:00:01.750+0000	done dumping `jschan.filters` (12 documents)
+2026-04-15T01:00:01.750+0000	writing `jschan.roles` to `archive on stdout`
+2026-04-15T01:00:01.751+0000	done dumping `jschan.poststats` (26 documents)
+2026-04-15T01:00:01.751+0000	writing `jschan.accounts` to `archive on stdout`
+2026-04-15T01:00:01.751+0000	done dumping `jschan.modlog` (73 documents)
+2026-04-15T01:00:01.751+0000	writing `jschan.version` to `archive on stdout`
+2026-04-15T01:00:01.752+0000	done dumping `jschan.roles` (8 documents)
+2026-04-15T01:00:01.752+0000	writing `jschan.globalsettings` to `archive on stdout`
+2026-04-15T01:00:01.764+0000	done dumping `jschan.version` (1 document)
+2026-04-15T01:00:01.764+0000	writing `jschan.news` to `archive on stdout`
+2026-04-15T01:00:01.765+0000	done dumping `jschan.accounts` (7 documents)
+2026-04-15T01:00:01.765+0000	writing `jschan.bans` to `archive on stdout`
+2026-04-15T01:00:01.767+0000	done dumping `jschan.files` (29 documents)
+2026-04-15T01:00:01.767+0000	writing `jschan.captcha` to `archive on stdout`
+2026-04-15T01:00:01.770+0000	done dumping `jschan.captcha` (0 documents)
+2026-04-15T01:00:01.770+0000	writing `jschan.custompages` to `archive on stdout`
+2026-04-15T01:00:01.773+0000	done dumping `jschan.globalsettings` (1 document)
+2026-04-15T01:00:01.773+0000	writing `jschan.ratelimit` to `archive on stdout`
+2026-04-15T01:00:01.773+0000	done dumping `jschan.custompages` (0 documents)
+2026-04-15T01:00:01.774+0000	writing `jschan.bypass` to `archive on stdout`
+2026-04-15T01:00:01.776+0000	done dumping `jschan.bypass` (0 documents)
+2026-04-15T01:00:01.779+0000	done dumping `jschan.news` (1 document)
+2026-04-15T01:00:01.779+0000	done dumping `jschan.bans` (0 documents)
+2026-04-15T01:00:01.783+0000	done dumping `jschan.ratelimit` (0 documents)
+Step 2/3: Creating Borg archive...
+passphrase supplied in BORG_PASSPHRASE, by BORG_PASSCOMMAND or via BORG_PASSPHRASE_FD is incorrect.
+  [ERROR] Borg failed!
+--- Starting Backup for [fogchan] at Wed Apr 15 09:30:34 AM CEST 2026 ---
+Step 1/3: Dumping mongodb database from 42chan-dev-db...
+2026-04-15T07:30:34.573+0000	writing `admin.system.users` to `archive on stdout`
+2026-04-15T07:30:34.575+0000	done dumping `admin.system.users` (2 documents)
+2026-04-15T07:30:34.575+0000	writing `admin.system.version` to `archive on stdout`
+2026-04-15T07:30:34.580+0000	done dumping `admin.system.version` (1 document)
+2026-04-15T07:30:34.580+0000	writing `jschan.modlog` to `archive on stdout`
+2026-04-15T07:30:34.580+0000	writing `jschan.boards` to `archive on stdout`
+2026-04-15T07:30:34.580+0000	writing `jschan.posts` to `archive on stdout`
+2026-04-15T07:30:34.581+0000	writing `jschan.files` to `archive on stdout`
+2026-04-15T07:30:34.583+0000	done dumping `jschan.posts` (48 documents)
+2026-04-15T07:30:34.583+0000	writing `jschan.poststats` to `archive on stdout`
+2026-04-15T07:30:34.584+0000	done dumping `jschan.files` (29 documents)
+2026-04-15T07:30:34.584+0000	writing `jschan.filters` to `archive on stdout`
+2026-04-15T07:30:34.585+0000	done dumping `jschan.boards` (70 documents)
+2026-04-15T07:30:34.585+0000	writing `jschan.roles` to `archive on stdout`
+2026-04-15T07:30:34.586+0000	done dumping `jschan.modlog` (73 documents)
+2026-04-15T07:30:34.586+0000	writing `jschan.accounts` to `archive on stdout`
+2026-04-15T07:30:34.588+0000	done dumping `jschan.poststats` (28 documents)
+2026-04-15T07:30:34.588+0000	writing `jschan.version` to `archive on stdout`
+2026-04-15T07:30:34.592+0000	done dumping `jschan.accounts` (7 documents)
+2026-04-15T07:30:34.592+0000	writing `jschan.globalsettings` to `archive on stdout`
+2026-04-15T07:30:34.595+0000	done dumping `jschan.filters` (12 documents)
+2026-04-15T07:30:34.595+0000	writing `jschan.news` to `archive on stdout`
+2026-04-15T07:30:34.596+0000	done dumping `jschan.version` (1 document)
+2026-04-15T07:30:34.596+0000	writing `jschan.bans` to `archive on stdout`
+2026-04-15T07:30:34.596+0000	done dumping `jschan.roles` (8 documents)
+2026-04-15T07:30:34.596+0000	writing `jschan.captcha` to `archive on stdout`
+2026-04-15T07:30:34.596+0000	done dumping `jschan.bans` (0 documents)
+2026-04-15T07:30:34.596+0000	writing `jschan.custompages` to `archive on stdout`
+2026-04-15T07:30:34.597+0000	done dumping `jschan.captcha` (0 documents)
+2026-04-15T07:30:34.597+0000	writing `jschan.ratelimit` to `archive on stdout`
+2026-04-15T07:30:34.597+0000	done dumping `jschan.custompages` (0 documents)
+2026-04-15T07:30:34.597+0000	writing `jschan.bypass` to `archive on stdout`
+2026-04-15T07:30:34.601+0000	done dumping `jschan.ratelimit` (0 documents)
+2026-04-15T07:30:34.601+0000	done dumping `jschan.globalsettings` (1 document)
+2026-04-15T07:30:34.601+0000	done dumping `jschan.bypass` (0 documents)
+2026-04-15T07:30:34.605+0000	done dumping `jschan.news` (1 document)
+Step 2/3: Creating Borg archive...
+Initializing cache transaction: Reading configInitializing cache transaction: Reading chunksInitializing cache transaction: Reading files194.59 kB O 37.38 kB C 37.38 kB D 0 N tmp/db_dump.archive                       289.53 MB O 252.79 MB C 37.38 kB D 1674 N opt/42chan-dev-d.../static/flag/museum374.61 MB O 267.55 MB C 294.59 kB D 1846 N opt/42chan-dev-...TigerLog.0000000007                                                                                Saving files cacheSaving chunks cacheSaving cache config------------------------------------------------------------------------------
+Repository: ssh://james@192.168.2.51/home/james/backups/omnichan
+Archive name: fogchan-2026-04-15T09:30:34
+Archive fingerprint: 6af891e1f0d7bd7e7894eaf45e0971a543ebdd469686b6f5f53193b685259cf4
+Time (start): Wed, 2026-04-15 09:30:36
+Time (end):   Wed, 2026-04-15 09:30:36
+Duration: 0.52 seconds
+Number of files: 1942
+Utilization of max. archive size: 0%
+------------------------------------------------------------------------------
+                       Original size      Compressed size    Deduplicated size
+This archive:              559.31 MB            312.49 MB            990.51 kB
+All archives:                1.78 GB              1.02 GB            450.13 MB
+
+                       Unique chunks         Total chunks
+Chunk index:                    4020                 7775
+------------------------------------------------------------------------------
+Step 3/3: Pruning old backups...
+Keeping archive (rule: daily #1):        fogchan-2026-04-15T09:30:34          Wed, 2026-04-15 09:30:36 [6af891e1f0d7bd7e7894eaf45e0971a543ebdd469686b6f5f53193b685259cf4]
+Pruning archive (1/1):                   fogchan-2026-04-15T09:21:45          Wed, 2026-04-15 09:21:47 [f2a569bbeaf6511de9f188de67943bfec735ea6c7f9271ba8d02e47d993bcae4]
+Keeping archive (rule: daily #2):        netherchan-2026-04-12T16:05:26       Sun, 2026-04-12 16:05:28 [ffb5e3b17d4b6fcd80deaff55bc69be96eb3677b1b3232de2254d7f395310086]
+Keeping archive (rule: daily[oldest] #3): omnichan-2026-04-12T15:36:53         Sun, 2026-04-12 15:36:54 [ba9e3bc8520382e776a37a2b356c8d0103ddbb0d99a2977c600b8955b4d07c9e]
+✅ Backup for fogchan Complete! ✅
